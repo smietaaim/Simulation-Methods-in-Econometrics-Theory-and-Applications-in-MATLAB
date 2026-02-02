@@ -23,12 +23,31 @@ t_df = 3;
 % 3.4. Define true values for the coefficients
 B_true = [0.2 3.5]';
 
-%% 4. Asymptotic normality of the OLS estimator
+%% 4. Plot the error distributions: Normal vs. t
 
-% 4.1. Preallocate matrix to store sampling distributions
+% 4.1. Draw errors from the normal and t distributions
+u_normal = random('Normal',0,1,[100 1]);
+u_t = random('t',t_df,[100 1]);
+
+% 4.2. Plot the error distributions
+figure
+set(gcf,'Position',[100,100,1000,1000]); 
+
+hold on
+ksdensity(u_normal)
+ksdensity(u_t)
+title('Fig. 1. Error distributions: Normal vs. t-distributed errors')
+legend('Normal errors','t-distributed errors')
+xlabel('u')
+ylabel('Density')
+hold off
+
+%% 5. Asymptotic normality of the OLS estimator
+
+% 5.1. Preallocate matrix to store sampling distributions
 B_hat_by_N = NaN(N_sim,length(N_obs_grid));
 
-% 4.2. For loop
+% 5.2. For loop
 for j = 1:length(N_obs_grid)
     N_obs_j = N_obs_grid(j);
     % Recreate regressors for each sample size
@@ -47,10 +66,12 @@ for j = 1:length(N_obs_grid)
     B_hat_by_N(:,j) = B_hat_temp;
 end
 
-%% 5. Overlay convergence to normality
+%% 6. Overlay convergence to normality
 
 % Figure
 figure
+set(gcf,'Position',[100,100,1000,1000]); 
+
 hold on
 for j = 1:length(N_obs_grid)
     [f,xi] = ksdensity(B_hat_by_N(:,j));
@@ -61,6 +82,6 @@ xlim([min(B_hat_by_N(:)) max(B_hat_by_N(:))])
 xlabel('B\_hat\_1')
 ylabel('Density')
 legend(cellstr("N = " + string(N_obs_grid)))
-title(['Fig. 1. Asymptotic normality of the OLS estimator with ' ...
+title(['Fig. 2. Asymptotic normality of the OLS estimator with ' ...
     't-distributed errors'])
 hold off
