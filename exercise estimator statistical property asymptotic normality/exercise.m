@@ -73,7 +73,7 @@ asy_std = sqrt(sigma_u2/var_x1);
 x_grid = linspace(min(B_hat_by_N(:)),max(B_hat_by_N(:)),400);
 normal_density = normpdf(x_grid,0,asy_std);
 
-% Figure
+% 6.2. Figure
 figure
 set(gcf,'Position',[100,100,1000,1000]); 
 
