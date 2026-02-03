@@ -31,8 +31,6 @@ u_t = random('t',t_df,[100 1]);
 
 % 4.2. Plot the error distributions
 figure
-set(gcf,'Position',[100,100,1000,1000]); 
-
 hold on
 ksdensity(u_normal)
 ksdensity(u_t)
@@ -67,18 +65,16 @@ end
 %% 6. Overlay convergence to normality
 
 % 6.1. Construct theoretical asymptotic normal density
-sigma_u2 = t_df/(t_df - 2); % Variance of t_df errors
-var_x1 = 1/3; % Variance of Uniform(-1,1)
-asy_std = sqrt(sigma_u2/var_x1);
+var_u = t_df/(t_df - 2); % Variance of u
+var_x_1 = 1/3; % Variance of x_1
+std_asymptotic = sqrt(var_u/var_x_1);
 x_grid = linspace(min(B_hat_by_N(:)),max(B_hat_by_N(:)),400);
-normal_density = normpdf(x_grid,0,asy_std);
+normal_density = normpdf(x_grid,0,std_asymptotic);
 
 % 6.2. Figure
 figure
-set(gcf,'Position',[100,100,1000,1000]); 
-
 hold on
-plot(x_grid, normal_density,'Color',[0 0 0]);
+plot(x_grid,normal_density,'Color',[0 0 0]);
 for j = 1:length(N_obs_grid)
     [f, xi] = ksdensity(B_hat_by_N(:,j),'Bandwidth',[]);
     plot(xi, f)
