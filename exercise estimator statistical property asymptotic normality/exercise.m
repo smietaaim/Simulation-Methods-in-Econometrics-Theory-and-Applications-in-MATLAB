@@ -12,7 +12,7 @@ clear;
 %% 3. Simulation setup
 
 % 3.1. Define a sequence of sample sizes
-N_obs_grid = [10 100 2000];
+N_obs_grid = [20 1000];
 
 % 3.2. Define the number of simulations 
 N_sim = 5000;
@@ -31,6 +31,8 @@ u_t = random('t',t_df,[100 1]);
 
 % 4.2. Plot the error distributions
 figure
+set(gcf,'Position',[100,100,1000,1000]); 
+
 hold on
 ksdensity(u_normal)
 ksdensity(u_t)
@@ -64,18 +66,27 @@ end
 
 %% 6. Overlay convergence to normality
 
+% 6.1. Construct theoretical asymptotic normal density
+sigma_u2 = t_df/(t_df - 2); % Variance of t_df errors
+var_x1 = 1/3; % Variance of Uniform(-1,1)
+asy_std = sqrt(sigma_u2/var_x1);
+x_grid = linspace(min(B_hat_by_N(:)),max(B_hat_by_N(:)),400);
+normal_density = normpdf(x_grid,0,asy_std);
+
 % Figure
 figure
+set(gcf,'Position',[100,100,1000,1000]); 
+
 hold on
+plot(x_grid, normal_density,'Color',[0 0 0]);
 for j = 1:length(N_obs_grid)
-    [f,xi] = ksdensity(B_hat_by_N(:,j),'Bandwidth',[]);
-    plot(xi,f)
+    [f, xi] = ksdensity(B_hat_by_N(:,j),'Bandwidth',[]);
+    plot(xi, f)
 end
-% Fix x-limits using global min/max
 xlim([min(B_hat_by_N(:)) max(B_hat_by_N(:))])
 xlabel('B\_hat\_1')
 ylabel('Density')
-legend(cellstr("N = " + string(N_obs_grid)))
+legend(["Asymptotic normal",cellstr("N = " + string(N_obs_grid))])
 title(['Fig. 2. Asymptotic normality of the OLS estimator with ' ...
-    't-distributed errors'])
+       't-distributed errors'])
 hold off
