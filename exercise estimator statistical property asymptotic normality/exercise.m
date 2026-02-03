@@ -7,6 +7,8 @@
 % despite the regression errors being non-normal.
 
 %% 2. Clear the workspace
+
+% Clear previous results
 clear;
 
 %% 3. Simulation setup
@@ -65,11 +67,11 @@ end
 %% 6. Overlay convergence to normality
 
 % 6.1. Construct theoretical asymptotic normal density
-var_u = t_df/(t_df - 2); % Variance of u
-var_x_1 = 1/3; % Variance of x_1
+var_u = t_df/(t_df - 2);
+var_x_1 = 1/3;
 std_asymptotic = sqrt(var_u/var_x_1);
 x_grid = linspace(min(B_hat_by_N(:)),max(B_hat_by_N(:)),400);
-normal_density = normpdf(x_grid,0,std_asymptotic);
+normal_density = pdf('Normal',x_grid,0,std_asymptotic);
 
 % 6.2. Figure
 figure
