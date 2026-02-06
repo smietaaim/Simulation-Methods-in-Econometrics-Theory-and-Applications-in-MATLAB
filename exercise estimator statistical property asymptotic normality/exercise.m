@@ -27,11 +27,13 @@ B_true = [0.2 3.5]';
 
 %% 4. Plot the error distributions: Normal vs. t
 
-% 4.1. Draw errors from the normal and t distributions
+% 4.1. Draw errors from the normal distribution
 u_normal = random('Normal',0,1,[100 1]);
+
+% 4.2. Draw errors from the t distribution
 u_t = random('t',t_df,[100 1]);
 
-% 4.2. Plot the error distributions
+% 4.3. Plot the error distributions
 figure
 hold on
 ksdensity(u_normal)
@@ -71,15 +73,15 @@ var_u = t_df/(t_df - 2);
 var_x_1 = 1/3;
 std_asymptotic = sqrt(var_u/var_x_1);
 x_grid = linspace(min(B_hat_by_N(:)),max(B_hat_by_N(:)),400);
-normal_density = pdf('Normal',x_grid,0,std_asymptotic);
+pdf_normal = pdf('Normal',x_grid,0,std_asymptotic);
 
 % 6.2. Figure
 figure
 hold on
-plot(x_grid,normal_density,'Color',[0 0 0]);
+plot(x_grid,pdf_normal,'Color',[0 0 0]);
 for j = 1:length(N_obs_grid)
-    [f, xi] = ksdensity(B_hat_by_N(:,j),'Bandwidth',[]);
-    plot(xi, f)
+    [f,xi] = ksdensity(B_hat_by_N(:,j),'Bandwidth',[]);
+    plot(xi,f)
 end
 xlim([min(B_hat_by_N(:)) max(B_hat_by_N(:))])
 xlabel('B\_hat\_1')
