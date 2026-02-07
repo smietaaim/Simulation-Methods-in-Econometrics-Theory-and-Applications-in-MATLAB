@@ -35,8 +35,6 @@ u_t = random('t',t_df,[100 1]);
 
 % 4.3. Plot the error distributions
 figure
-set(gcf,'Position',[100,100,1000,1000]); 
-
 hold on
 ksdensity(u_normal)
 ksdensity(u_t)
@@ -88,8 +86,6 @@ pdf_normal = pdf('Normal',x_grid,0,std_asymptotic);
 
 % 6.6. Figure
 figure
-set(gcf,'Position',[100,100,1000,1000]); 
-
 hold on
 plot(x_grid,pdf_normal,'Color',[0 0 0]);
 for j = 1:length(N_obs_grid)
