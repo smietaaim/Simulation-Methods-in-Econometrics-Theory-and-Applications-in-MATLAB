@@ -44,7 +44,7 @@ xlabel('u')
 ylabel('Density')
 hold off
 
-%% 5. Asymptotic normality of the OLS estimator
+%% 5. Simulate the asymptotic sampling distribution of the OLS estimator
 
 % 5.1. Preallocate matrix to store scaled estimation errors
 B_hat_by_N = NaN(N_sim,length(N_obs_grid));
