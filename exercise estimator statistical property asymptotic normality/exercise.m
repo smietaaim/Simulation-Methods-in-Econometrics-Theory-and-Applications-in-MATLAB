@@ -68,19 +68,27 @@ end
 
 %% 6. Overlay convergence to normality
 
-% 6.1. Construct theoretical asymptotic normal density
+% 6.1. Compute population variance of the t-distributed errors
 var_u = t_df/(t_df - 2);
+
+% 6.2. Compute population variance of the uniform regressor
 var_x_1 = 1/3;
+
+% 6.3. Compute asymptotic standard deviation of the scaled OLS estimator
 std_asymptotic = sqrt(var_u/var_x_1);
+
+% 6.4. Create grid of x-values for plotting the theoretical density
 x_grid = linspace(min(B_hat_by_N(:)),max(B_hat_by_N(:)),400);
+
+% 6.5. Construct theoretical asymptotic normal density
 pdf_normal = pdf('Normal',x_grid,0,std_asymptotic);
 
-% 6.2. Figure
+% 6.6. Figure
 figure
 hold on
 plot(x_grid,pdf_normal,'Color',[0 0 0]);
 for j = 1:length(N_obs_grid)
-    [f,xi] = ksdensity(B_hat_by_N(:,j),'Bandwidth',[]);
+    [f,xi] = ksdensity(B_hat_by_N(:,j));
     plot(xi,f)
 end
 xlim([min(B_hat_by_N(:)) max(B_hat_by_N(:))])
