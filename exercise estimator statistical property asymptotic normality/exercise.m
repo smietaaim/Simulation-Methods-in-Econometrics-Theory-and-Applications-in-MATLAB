@@ -60,7 +60,7 @@ for j = 1:length(N_obs_grid)
         u = random('t',t_df,[N_obs_j 1]);
         y = X_j*B_true + u;
         LSS = exercisefunctionlss(y,X_j);
-        % Store the asymptotically scaled slope estimation error
+        % Store the asymptotically scaled coefficient estimation error
         B_hat_temp(i) = sqrt(N_obs_j)*(LSS.B_hat(2,1)-B_true(2));
     end
     % Save results for this sample size
