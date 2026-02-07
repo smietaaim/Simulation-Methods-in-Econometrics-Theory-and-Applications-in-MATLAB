@@ -14,7 +14,7 @@ clear;
 %% 3. Simulation setup
 
 % 3.1. Define a sequence of sample sizes
-N_obs_grid = [20 1000];
+N_obs_grid = [10 1000];
 
 % 3.2. Define the number of simulations 
 N_sim = 5000;
