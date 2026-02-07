@@ -46,10 +46,10 @@ hold off
 
 %% 5. Asymptotic normality of the OLS estimator
 
-% 5.1. Preallocate matrix to store sampling distributions
+% 5.1. Preallocate matrix to store scaled estimation errors
 B_hat_by_N = NaN(N_sim,length(N_obs_grid));
 
-% 5.2. For loop
+% 5.2. Loop over each sample size and simulate its sampling distribution
 for j = 1:length(N_obs_grid)
     N_obs_j = N_obs_grid(j);
     x_0 = ones(N_obs_j,1);
@@ -60,9 +60,10 @@ for j = 1:length(N_obs_grid)
         u = random('t',t_df,[N_obs_j 1]);
         y = X_j*B_true + u;
         LSS = exercisefunctionlss(y,X_j);
-        % Asymptotic-scaled estimation error (sqrt(N) * estimation error)
+        % Store the asymptotically scaled slope estimation error
         B_hat_temp(i) = sqrt(N_obs_j)*(LSS.B_hat(2,1)-B_true(2));
     end
+    % Save results for this sample size
     B_hat_by_N(:,j) = B_hat_temp;
 end
 
