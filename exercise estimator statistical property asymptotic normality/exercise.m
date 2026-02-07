@@ -38,10 +38,16 @@ figure
 hold on
 ksdensity(u_normal)
 ksdensity(u_t)
-title('Fig. 1. Error distributions: Normal vs. t-distributed errors')
-legend('Normal errors','t-distributed errors')
+% Theoretical SD of N(0,1)
+sd_normal = 1;
+% Choose how many standard deviations to show
+k = 7;
+% Symmetric x‑limits based on the theoretical SD
+xlim([-k*sd_normal, k*sd_normal])
 xlabel('u')
 ylabel('Density')
+legend('Normal errors','t-distributed errors')
+title('Fig. 1. Error distributions: Normal vs. t-distributed errors')
 hold off
 
 %% 5. Simulate the asymptotic sampling distribution of the OLS estimator
@@ -89,10 +95,13 @@ figure
 hold on
 plot(x_grid,pdf_normal,'Color',[0 0 0]);
 for j = 1:length(N_obs_grid)
-    [f,xi] = ksdensity(B_hat_by_N(:,j));
+    [f,xi] = ksdensity(B_hat_by_N(:,j),'Bandwidth',[]);
     plot(xi,f)
 end
-xlim([min(B_hat_by_N(:)) max(B_hat_by_N(:))])
+% Choose how many standard deviations to show
+k = 7;
+% Symmetric x-limits based on the theoretical asymptotic SD
+xlim([-k*std_asymptotic, k*std_asymptotic])
 xlabel('B\_hat\_1')
 ylabel('Density')
 legend(["Asymptotic normal",cellstr("N = " + string(N_obs_grid))])
