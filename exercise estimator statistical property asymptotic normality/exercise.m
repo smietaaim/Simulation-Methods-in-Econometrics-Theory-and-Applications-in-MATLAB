@@ -14,7 +14,7 @@ clear;
 %% 3. Simulation setup
 
 % 3.1. Define a sequence of sample sizes
-N_obs_grid = [10 1000];
+N_obs_grid = [10 30 1000];
 
 % 3.2. Define the number of simulations 
 N_sim = 5000;
@@ -35,6 +35,8 @@ u_t = random('t',t_df,[100 1]);
 
 % 4.3. Plot the error distributions
 figure
+set(gcf,'Position',[100,100,1000,1000]); 
+
 hold on
 ksdensity(u_normal)
 ksdensity(u_t)
@@ -86,6 +88,8 @@ pdf_normal = pdf('Normal',x_grid,0,std_asymptotic);
 
 % 6.6. Figure
 figure
+set(gcf,'Position',[100,100,1000,1000]); 
+
 hold on
 plot(x_grid,pdf_normal,'Color',[0 0 0]);
 for j = 1:length(N_obs_grid)
