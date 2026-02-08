@@ -55,7 +55,7 @@ hold off
 % 5.1. Preallocate matrix to store scaled estimation errors
 B_hat_by_N = NaN(N_sim,length(N_obs_grid));
 
-% 5.2. Loop over each sample size and simulate its sampling distribution
+% 5.2. Loop over each sample size and simulate a sampling distribution
 for j = 1:length(N_obs_grid)
     N_obs_j = N_obs_grid(j);
     x_0 = ones(N_obs_j,1);
@@ -90,15 +90,15 @@ x_grid = linspace(min(B_hat_by_N(:)),max(B_hat_by_N(:)),400);
 % 6.5. Construct theoretical asymptotic normal density
 pdf_normal = pdf('Normal',x_grid,0,std_asymptotic);
 
-% 6.6. fixed bandwidth for all N
-band = 0.5;
+% 6.6. Define bandwidth that is fixed for all N
+Bandwidth = 0.5;
 
 % 6.7. Figure
 figure
 hold on
 plot(x_grid,pdf_normal,'Color',[0 0 0]);
 for j = 1:length(N_obs_grid)
-    [f,xi] = ksdensity(B_hat_by_N(:,j),'Bandwidth',band);
+    [f,xi] = ksdensity(B_hat_by_N(:,j),'Bandwidth',Bandwidth);
     plot(xi,f)
 end
 % Choose how many standard deviations to show
