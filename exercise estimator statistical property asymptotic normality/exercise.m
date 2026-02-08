@@ -14,7 +14,7 @@ clear;
 %% 3. Simulation setup
 
 % 3.1. Define a sequence of sample sizes
-N_obs_grid = [10 30 3000];
+N_obs_grid = [10 30 1000];
 
 % 3.2. Define the number of simulations 
 N_sim = 5000;
@@ -90,12 +90,15 @@ x_grid = linspace(min(B_hat_by_N(:)),max(B_hat_by_N(:)),400);
 % 6.5. Construct theoretical asymptotic normal density
 pdf_normal = pdf('Normal',x_grid,0,std_asymptotic);
 
-% 6.6. Figure
+% 6.6. fixed bandwidth for all N
+band = 0.5;
+
+% 6.7. Figure
 figure
 hold on
 plot(x_grid,pdf_normal,'Color',[0 0 0]);
 for j = 1:length(N_obs_grid)
-    [f,xi] = ksdensity(B_hat_by_N(:,j));
+    [f,xi] = ksdensity(B_hat_by_N(:,j),'Bandwidth',band);
     plot(xi,f)
 end
 % Choose how many standard deviations to show
