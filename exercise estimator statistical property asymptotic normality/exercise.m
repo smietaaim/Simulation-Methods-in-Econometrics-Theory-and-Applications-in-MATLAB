@@ -41,7 +41,7 @@ ksdensity(u_t)
 % Theoretical SD of N(0,1)
 sd_normal = 1;
 % Choose how many standard deviations to show
-k = 7;
+k = 8;
 % Symmetric x‑limits based on the theoretical SD
 xlim([-k*sd_normal,k*sd_normal])
 xlabel('u')
@@ -102,7 +102,7 @@ for j = 1:length(N_obs_grid)
     plot(xi,f)
 end
 % Choose how many standard deviations to show
-k = 7;
+k = 8;
 % Symmetric x-limits based on the theoretical asymptotic SD
 xlim([-k*sd_asymptotic,k*sd_asymptotic])
 xlabel('B\_hat\_1')
