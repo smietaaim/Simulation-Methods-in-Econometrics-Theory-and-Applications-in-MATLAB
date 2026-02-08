@@ -82,13 +82,13 @@ var_u = t_df/(t_df - 2);
 var_x_1 = 1/3;
 
 % 6.3. Compute asymptotic standard deviation of the scaled OLS estimator
-std_asymptotic = sqrt(var_u/var_x_1);
+sd_asymptotic = sqrt(var_u/var_x_1);
 
 % 6.4. Create grid of x-values for plotting the theoretical density
 x_grid = linspace(min(B_hat_by_N(:)),max(B_hat_by_N(:)),400);
 
 % 6.5. Construct theoretical asymptotic normal density
-pdf_normal = pdf('Normal',x_grid,0,std_asymptotic);
+pdf_normal = pdf('Normal',x_grid,0,sd_asymptotic);
 
 % 6.6. Define bandwidth that is fixed for all N
 Bandwidth = 0.5;
@@ -104,7 +104,7 @@ end
 % Choose how many standard deviations to show
 k = 7;
 % Symmetric x-limits based on the theoretical asymptotic SD
-xlim([-k*std_asymptotic, k*std_asymptotic])
+xlim([-k*sd_asymptotic, k*sd_asymptotic])
 xlabel('B\_hat\_1')
 ylabel('Density')
 legend(["Asymptotic normal",cellstr("N = " + string(N_obs_grid))])
