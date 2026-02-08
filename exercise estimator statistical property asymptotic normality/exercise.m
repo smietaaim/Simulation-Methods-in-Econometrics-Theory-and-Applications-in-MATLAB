@@ -95,7 +95,7 @@ figure
 hold on
 plot(x_grid,pdf_normal,'Color',[0 0 0]);
 for j = 1:length(N_obs_grid)
-    [f,xi] = ksdensity(B_hat_by_N(:,j),'Bandwidth',[]);
+    [f,xi] = ksdensity(B_hat_by_N(:,j));
     plot(xi,f)
 end
 % Choose how many standard deviations to show
