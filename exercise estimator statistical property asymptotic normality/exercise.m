@@ -43,7 +43,7 @@ sd_normal = 1;
 % Choose how many standard deviations to show
 k = 7;
 % Symmetric x‑limits based on the theoretical SD
-xlim([-k*sd_normal, k*sd_normal])
+xlim([-k*sd_normal,k*sd_normal])
 xlabel('u')
 ylabel('Density')
 legend('Normal errors','t-distributed errors')
@@ -104,7 +104,7 @@ end
 % Choose how many standard deviations to show
 k = 7;
 % Symmetric x-limits based on the theoretical asymptotic SD
-xlim([-k*sd_asymptotic, k*sd_asymptotic])
+xlim([-k*sd_asymptotic,k*sd_asymptotic])
 xlabel('B\_hat\_1')
 ylabel('Density')
 legend(["Asymptotic normal",cellstr("N = " + string(N_obs_grid))])
