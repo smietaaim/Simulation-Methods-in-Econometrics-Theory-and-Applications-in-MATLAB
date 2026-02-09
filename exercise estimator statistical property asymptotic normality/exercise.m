@@ -64,7 +64,7 @@ for j = 1:length(N_obs_grid)
     B_hat_temp = NaN(N_sim,1);
     for i = 1:N_sim
         u = random('t',t_df,[N_obs_j 1]);
-        y = X_j*B_true + u;
+        y = X_j*B_true+u;
         LSS = exercisefunctionlss(y,X_j);
         % Store the asymptotically scaled coefficient estimation error
         B_hat_temp(i) = sqrt(N_obs_j)*(LSS.B_hat(2,1)-B_true(2));
@@ -76,7 +76,7 @@ end
 %% 6. Overlay convergence to normality
 
 % 6.1. Compute population variance of the t-distributed errors
-var_u = t_df/(t_df - 2);
+var_u = t_df/(t_df-2);
 
 % 6.2. Compute population variance of the uniform regressor
 var_x_1 = 1/3;
