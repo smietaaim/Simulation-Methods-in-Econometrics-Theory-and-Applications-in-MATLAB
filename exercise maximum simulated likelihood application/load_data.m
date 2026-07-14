@@ -15,7 +15,5 @@ clc;
 % -------------------------------------------------------------------------
 % Load the MAT-file.
 % -------------------------------------------------------------------------
-load(...
-    ['/Users/tungakantarci/Library/Mobile Documents/'...
-     'com~apple~CloudDocs/Academic/Teaching/Empirical exercise/MATLAB/' ...
-     'exercise sim msl/exercise data/data.mat'] )
+% load('data.mat')
+  load('/Users/tungakantarci/Library/Mobile Documents/com~apple~CloudDocs/Academic/Teaching/Empirical exercise/MATLAB/exercise sim msl app/exercise mat/data.mat')

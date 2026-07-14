@@ -6,9 +6,9 @@ function sum_log_avg_lik = likelihood(...
     choice_at_age_regime_61,...
     choice_at_age_regime_63,...
     choice_at_age_regime_65,...
-    l_i_t_61E,l_i_t_61P,l_i_t_61L,...
-    l_i_t_63E,l_i_t_63P,l_i_t_63L,...
-    l_i_t_65E,l_i_t_65P,l_i_t_65L,...
+    h_i_t_61E,h_i_t_61P,h_i_t_61L,...
+    h_i_t_63E,h_i_t_63P,h_i_t_63L,...
+    h_i_t_65E,h_i_t_65P,h_i_t_65L,...
     y_i_t_61E,y_i_t_61P,y_i_t_61L,...
     y_i_t_63E,y_i_t_63P,y_i_t_63L,...
     y_i_t_65E,y_i_t_65P,y_i_t_65L,...
@@ -18,11 +18,6 @@ function sum_log_avg_lik = likelihood(...
 % DEFINITION: N_k — number of covariates (1×1 scalar).
 % -------------------------------------------------------------------------
 N_k = size(X_i,2);
-
-% -------------------------------------------------------------------------
-% DEFINITION: N_j — number of choice alternatives.
-% -------------------------------------------------------------------------
-N_j = 3;
 
 % -------------------------------------------------------------------------
 % DEFINITION:
@@ -45,11 +40,11 @@ N_j = 3;
 % -------------------------------------------------------------------------
 beta_l    = theta(1:N_k)';
 eta_l     = theta(N_k+1);
-alpha_y   = theta(N_k+2);
-alpha_l_y = theta(N_k+3);
-rho       = theta(N_k+4);
-sigma_l   = theta(N_k+5);
-T         = theta(N_k+6);
+sigma_l   = theta(N_k+2);
+T         = theta(N_k+3);
+alpha_y   = theta(N_k+4);
+alpha_l_y = theta(N_k+5);
+rho       = theta(N_k+6);
 
 % -------------------------------------------------------------------------
 % DEFINITION: e_i_l — error term entering the random‑coefficient equation.
@@ -70,17 +65,17 @@ alpha_i_t_l = X_i * beta_l + eta_l * t + e_i_l;
 % -------------------------------------------------------------------------
 % DEFINITION: log_T_l_i_t_61E — log(T - l_i_t_61E), N_i × N_t.
 % -------------------------------------------------------------------------
-log_T_l_i_t_61E = log(T-l_i_t_61E);
-log_T_l_i_t_61P = log(T-l_i_t_61P);
-log_T_l_i_t_61L = log(T-l_i_t_61L);
+log_T_h_i_t_61E = log(T-h_i_t_61E);
+log_T_h_i_t_61P = log(T-h_i_t_61P);
+log_T_h_i_t_61L = log(T-h_i_t_61L);
 
-log_T_l_i_t_63E = log(T-l_i_t_63E);
-log_T_l_i_t_63P = log(T-l_i_t_63P);
-log_T_l_i_t_63L = log(T-l_i_t_63L);
+log_T_h_i_t_63E = log(T-h_i_t_63E);
+log_T_h_i_t_63P = log(T-h_i_t_63P);
+log_T_h_i_t_63L = log(T-h_i_t_63L);
 
-log_T_l_i_t_65E = log(T-l_i_t_65E);
-log_T_l_i_t_65P = log(T-l_i_t_65P);
-log_T_l_i_t_65L = log(T-l_i_t_65L);
+log_T_h_i_t_65E = log(T-h_i_t_65E);
+log_T_h_i_t_65P = log(T-h_i_t_65P);
+log_T_h_i_t_65L = log(T-h_i_t_65L);
 
 % -------------------------------------------------------------------------
 % DEFINITION: log_y_i_t_61E — log(y_i_t_61E), dimensions N_i × N_t.
@@ -103,41 +98,41 @@ log_y_i_t_65L = log(y_i_t_65L);
 %                         The third dimension reflects multiple draws
 %                         for each individual i.
 % -------------------------------------------------------------------------
-U_i_t_61E = alpha_i_t_l .* log_T_l_i_t_61E ...
+U_i_t_61E = alpha_i_t_l .* log_T_h_i_t_61E ...
             + alpha_y .* log_y_i_t_61E ...
-            + alpha_l_y .* log_T_l_i_t_61E .* log_y_i_t_61E;
+            + alpha_l_y .* log_T_h_i_t_61E .* log_y_i_t_61E;
 
-U_i_t_61P = alpha_i_t_l .* log_T_l_i_t_61P ...
+U_i_t_61P = alpha_i_t_l .* log_T_h_i_t_61P ...
             + alpha_y .* log_y_i_t_61P ...
-            + alpha_l_y .* log_T_l_i_t_61P .* log_y_i_t_61P;
+            + alpha_l_y .* log_T_h_i_t_61P .* log_y_i_t_61P;
 
-U_i_t_61L = alpha_i_t_l .* log_T_l_i_t_61L ...
+U_i_t_61L = alpha_i_t_l .* log_T_h_i_t_61L ...
             + alpha_y .* log_y_i_t_61L ...
-            + alpha_l_y .* log_T_l_i_t_61L .* log_y_i_t_61L;
+            + alpha_l_y .* log_T_h_i_t_61L .* log_y_i_t_61L;
 
-U_i_t_63E = alpha_i_t_l .* log_T_l_i_t_63E ...
+U_i_t_63E = alpha_i_t_l .* log_T_h_i_t_63E ...
             + alpha_y .* log_y_i_t_63E ...
-            + alpha_l_y .* log_T_l_i_t_63E .* log_y_i_t_63E;
+            + alpha_l_y .* log_T_h_i_t_63E .* log_y_i_t_63E;
 
-U_i_t_63P = alpha_i_t_l .* log_T_l_i_t_63P ...
+U_i_t_63P = alpha_i_t_l .* log_T_h_i_t_63P ...
             + alpha_y .* log_y_i_t_63P ...
-            + alpha_l_y .* log_T_l_i_t_63P .* log_y_i_t_63P;
+            + alpha_l_y .* log_T_h_i_t_63P .* log_y_i_t_63P;
 
-U_i_t_63L = alpha_i_t_l .* log_T_l_i_t_63L ...
+U_i_t_63L = alpha_i_t_l .* log_T_h_i_t_63L ...
             + alpha_y .* log_y_i_t_63L ...
-            + alpha_l_y .* log_T_l_i_t_63L .* log_y_i_t_63L;
+            + alpha_l_y .* log_T_h_i_t_63L .* log_y_i_t_63L;
 
-U_i_t_65E = alpha_i_t_l .* log_T_l_i_t_65E ...
+U_i_t_65E = alpha_i_t_l .* log_T_h_i_t_65E ...
             + alpha_y .* log_y_i_t_65E ...
-            + alpha_l_y .* log_T_l_i_t_65E .* log_y_i_t_65E;
+            + alpha_l_y .* log_T_h_i_t_65E .* log_y_i_t_65E;
 
-U_i_t_65P = alpha_i_t_l .* log_T_l_i_t_65P ...
+U_i_t_65P = alpha_i_t_l .* log_T_h_i_t_65P ...
             + alpha_y .* log_y_i_t_65P ...
-            + alpha_l_y .* log_T_l_i_t_65P .* log_y_i_t_65P;
+            + alpha_l_y .* log_T_h_i_t_65P .* log_y_i_t_65P;
 
-U_i_t_65L = alpha_i_t_l .* log_T_l_i_t_65L ...
+U_i_t_65L = alpha_i_t_l .* log_T_h_i_t_65L ...
             + alpha_y .* log_y_i_t_65L ...
-            + alpha_l_y .* log_T_l_i_t_65L .* log_y_i_t_65L;
+            + alpha_l_y .* log_T_h_i_t_65L .* log_y_i_t_65L;
 
 % -------------------------------------------------------------------------
 % DEFINITION: rho_0_to_40 — vector with elements rho^(t−60); 0 = age 60,
@@ -196,6 +191,11 @@ exp_U_i_63 = [exp_U_i_63E exp_U_i_63P exp_U_i_63L];
 exp_U_i_65 = [exp_U_i_65E exp_U_i_65P exp_U_i_65L];
 
 % -------------------------------------------------------------------------
+% DEFINITION: N_j — number of choice alternatives.
+% -------------------------------------------------------------------------
+N_j = 3;
+
+% -------------------------------------------------------------------------
 % DEFINITION: ind_choice_at_age_regime_61 — column vectors; each column is
 %                                           a dummy indicating if
 %                                           alternative j is chosen by all
@@ -217,9 +217,7 @@ ind_choice_at_age_regime_65(:,N_j-0) = (choice_at_age_regime_65 == 3);
 
 % -------------------------------------------------------------------------
 % DEFINITION: lik_choice_at_age_regime_61 — likelihood of choice at
-%                                           question plans for retirement
-%                                           age 61, partial‑retirement
-%                                           duration long (five years), for
+%                                           retirement-age regime 61, for
 %                                           each i; N_i × 1 ×
 %                                           N_halton_draws_per_i. The sum
 %                                           function takes an array of size
