@@ -39,12 +39,12 @@ N_k = size(X_i,2);
 %     T          — number of hours in a week; estimated (1 × 1).
 % -------------------------------------------------------------------------
 beta_l    = theta(1:N_k)';
-eta_l     = theta(N_k+1);
-sigma_l   = theta(N_k+2);
-T         = theta(N_k+3);
-alpha_y   = theta(N_k+4);
-alpha_l_y = theta(N_k+5);
-rho       = theta(N_k+6);
+eta_l     = theta(N_k + 1);
+sigma_l   = theta(N_k + 2);
+T         = theta(N_k + 3);
+alpha_y   = theta(N_k + 4);
+alpha_l_y = theta(N_k + 5);
+rho       = theta(N_k + 6);
 
 % -------------------------------------------------------------------------
 % DEFINITION: e_i_l — error term entering the random‑coefficient equation.
@@ -65,17 +65,17 @@ alpha_i_t_l = X_i * beta_l + eta_l * t + e_i_l;
 % -------------------------------------------------------------------------
 % DEFINITION: log_T_l_i_t_61E — log(T - l_i_t_61E), N_i × N_t.
 % -------------------------------------------------------------------------
-log_T_h_i_t_61E = log(T-h_i_t_61E);
-log_T_h_i_t_61P = log(T-h_i_t_61P);
-log_T_h_i_t_61L = log(T-h_i_t_61L);
+log_T_h_i_t_61E = log(T - h_i_t_61E);
+log_T_h_i_t_61P = log(T - h_i_t_61P);
+log_T_h_i_t_61L = log(T - h_i_t_61L);
 
-log_T_h_i_t_63E = log(T-h_i_t_63E);
-log_T_h_i_t_63P = log(T-h_i_t_63P);
-log_T_h_i_t_63L = log(T-h_i_t_63L);
+log_T_h_i_t_63E = log(T - h_i_t_63E);
+log_T_h_i_t_63P = log(T - h_i_t_63P);
+log_T_h_i_t_63L = log(T - h_i_t_63L);
 
-log_T_h_i_t_65E = log(T-h_i_t_65E);
-log_T_h_i_t_65P = log(T-h_i_t_65P);
-log_T_h_i_t_65L = log(T-h_i_t_65L);
+log_T_h_i_t_65E = log(T - h_i_t_65E);
+log_T_h_i_t_65P = log(T - h_i_t_65P);
+log_T_h_i_t_65L = log(T - h_i_t_65L);
 
 % -------------------------------------------------------------------------
 % DEFINITION: log_y_i_t_61E — log(y_i_t_61E), dimensions N_i × N_t.
@@ -135,10 +135,10 @@ U_i_t_65L = alpha_i_t_l .* log_T_h_i_t_65L ...
             + alpha_l_y .* log_T_h_i_t_65L .* log_y_i_t_65L;
 
 % -------------------------------------------------------------------------
-% DEFINITION: rho_0_to_40 — vector with elements rho^(t−60); 0 = age 60,
+% DEFINITION: rho_0_to_40 — vector with elements rho^(t − 60); 0 = age 60,
 %                           40 = age 100; dimensions 1 × N_t.
 % -------------------------------------------------------------------------
-rho_0_to_40 = rho .^ (t-60);
+rho_0_to_40 = rho .^ (t - 60);
 
 % -------------------------------------------------------------------------
 % DEFINITION: pi — vector of survival probabilities at age 60 for ages
@@ -203,17 +203,17 @@ N_j = 3;
 %                                           alternative is chosen by i; N_i
 %                                           × N_j_plans.
 % -------------------------------------------------------------------------
-ind_choice_at_age_regime_61(:,N_j-2) = (choice_at_age_regime_61 == 1); 
-ind_choice_at_age_regime_61(:,N_j-1) = (choice_at_age_regime_61 == 2); 
-ind_choice_at_age_regime_61(:,N_j-0) = (choice_at_age_regime_61 == 3); 
+ind_choice_at_age_regime_61(:,N_j - 2) = (choice_at_age_regime_61 == 1); 
+ind_choice_at_age_regime_61(:,N_j - 1) = (choice_at_age_regime_61 == 2); 
+ind_choice_at_age_regime_61(:,N_j - 0) = (choice_at_age_regime_61 == 3); 
 
-ind_choice_at_age_regime_63(:,N_j-2) = (choice_at_age_regime_63 == 1); 
-ind_choice_at_age_regime_63(:,N_j-1) = (choice_at_age_regime_63 == 2); 
-ind_choice_at_age_regime_63(:,N_j-0) = (choice_at_age_regime_63 == 3); 
+ind_choice_at_age_regime_63(:,N_j - 2) = (choice_at_age_regime_63 == 1); 
+ind_choice_at_age_regime_63(:,N_j - 1) = (choice_at_age_regime_63 == 2); 
+ind_choice_at_age_regime_63(:,N_j - 0) = (choice_at_age_regime_63 == 3); 
 
-ind_choice_at_age_regime_65(:,N_j-2) = (choice_at_age_regime_65 == 1); 
-ind_choice_at_age_regime_65(:,N_j-1) = (choice_at_age_regime_65 == 2); 
-ind_choice_at_age_regime_65(:,N_j-0) = (choice_at_age_regime_65 == 3); 
+ind_choice_at_age_regime_65(:,N_j - 2) = (choice_at_age_regime_65 == 1); 
+ind_choice_at_age_regime_65(:,N_j - 1) = (choice_at_age_regime_65 == 2); 
+ind_choice_at_age_regime_65(:,N_j - 0) = (choice_at_age_regime_65 == 3); 
 
 % -------------------------------------------------------------------------
 % DEFINITION: lik_choice_at_age_regime_61 — likelihood of choice at

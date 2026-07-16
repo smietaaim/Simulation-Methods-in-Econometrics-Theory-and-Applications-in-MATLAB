@@ -55,7 +55,7 @@ tic
 % -------------------------------------------------------------------------
 % DEFINITION: theta_hat — maximum likelihood estimates of the parameters.
 % -------------------------------------------------------------------------
-[theta_hat,fval,exitflag,output,~,grad,hessian] = ...
+[theta_hat,fval,exitflag,output,~,~,hessian] = ...
     fmincon(obj,theta_ig,[],[],[],[],[],[],[],options);
 
 % -------------------------------------------------------------------------
@@ -79,10 +79,4 @@ theta_hat_see = sqrt(diag(inv(hessian)))';
 % -------------------------------------------------------------------------
 % DEFINITION: t_value — t-statistics for theta_hat.
 % -------------------------------------------------------------------------
-t_value = theta_hat ./ theta_hat_see;
-
-% -------------------------------------------------------------------------
-% DEFINITION: CI — 95% confidence intervals.
-% -------------------------------------------------------------------------
-CI = [theta_hat' - 1.96*theta_hat_see', ...
-      theta_hat' + 1.96*theta_hat_see'];
+t_statistic = theta_hat ./ theta_hat_see;
