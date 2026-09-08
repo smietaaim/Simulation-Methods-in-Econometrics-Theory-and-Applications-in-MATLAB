@@ -1,4 +1,4 @@
-# Introduction
+## Introduction
 
 Fundamental concepts in econometrics rest on the notion of repeated sampling from a population. However, in practice, repeated sampling is almost never feasible, which makes many of these concepts difficult to demonstrate and easy to treat as purely abstract. Peter Kennedy already highlighted this problem in 1979, in the first edition of A Guide to Econometrics, urging instructors to show students the sampling distribution of an estimator rather than merely describe it. His advice has not been widely adopted in teaching, but it has shaped the motivation behind the first four chapters of this book.
 
@@ -9,3 +9,18 @@ The hope is simple: once students see sampling distributions unfold before their
 The reamining chapters exploit simulation as a method to solve econometric problems. Many econometric models require evaluating expectations or integrals that do not have closed‑form solutions. In practice, these expressions are often simplified or avoided, which obscures the structure of the underlying model. Simulation provides a direct numerical alternative: by drawing from the relevant distributions, we can approximate these quantities without modifying the model. The same issue arises when models depend on random variables drawn from distributions that are not available in closed form. Simulation makes it possible to generate these variables and compute the expectations that depend on them, keeping the model intact rather than forcing it into analytically convenient forms.
 
 A second group of problems concerns estimation and inference. Some models cannot be estimated directly because their likelihood or moment conditions are too complicated to evaluate analytically. Simulation provides numerical approximations to these objects and makes it possible to match the model’s implications to the data. It also addresses situations where the distribution needed for Bayesian estimation cannot be derived in closed form: by constructing a sequence of simulated draws, we can approximate the posterior distribution and compute the quantities that depend on it. And when analytical variance formulas fail under heteroskedasticity, serial correlation, or clustering, simulation approximates the sampling distribution of an estimator by resampling or regenerating data. In all these settings, simulation supplies workable numerical solutions where analytical methods break down.
+
+## Why MATLAB
+MATLAB was chosen for its intuitive syntax, strong editing environment, and natural handling of matrix operations. Because vector and matrix algebra form the core of these econometrics exercises, MATLAB provides a framework that aligns directly with the pedagogical goals of this project. To support readers who are new to MATLAB, a dedicated workshop is included in this repository.
+
+## Structure of the Exercises
+Each exercise combines a concise theoretical overview with a worked application. The exposition is provided in PDF format and paired with the corresponding `.m` file, allowing readers to connect the mathematical ideas to executable code.
+
+## MathWorks Book Program
+This textbook has been accepted into the **MathWorks Book Program**, recognizing its contribution to teaching simulation‑based econometrics.
+
+## Required Toolboxes
+Some exercises may require the **Statistics and Machine Learning Toolbox**.
+
+## Ongoing Development
+The material is actively updated. Minor errors or inconsistencies may appear and will be corrected as the project evolves.
