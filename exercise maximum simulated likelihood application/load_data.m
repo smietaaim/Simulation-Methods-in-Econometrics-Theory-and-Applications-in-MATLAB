@@ -15,5 +15,4 @@ clc;
 % -------------------------------------------------------------------------
 % Load the MAT-file.
 % -------------------------------------------------------------------------
-% load('data.mat')
-  load('/Users/tungakantarci/Library/Mobile Documents/com~apple~CloudDocs/Academic/Teaching/Empirical exercise/SMiETaAiM/exercise msl app/exercise mat/data.mat')
+load('data.mat')
