@@ -10,11 +10,11 @@ The reamining chapters exploit simulation as a method to solve econometric probl
 
 A second group of problems concerns estimation and inference. Some models cannot be estimated directly because their likelihood or moment conditions are too complicated to evaluate analytically. Simulation provides numerical approximations to these objects and makes it possible to match the model’s implications to the data. It also addresses situations where the distribution needed for Bayesian estimation cannot be derived in closed form: by constructing a sequence of simulated draws, we can approximate the posterior distribution and compute the quantities that depend on it. And when analytical variance formulas fail under heteroskedasticity, serial correlation, or clustering, simulation approximates the sampling distribution of an estimator by resampling or regenerating data. In all these settings, simulation supplies workable numerical solutions where analytical methods break down.
 
-## Why MATLAB
-MATLAB was chosen for its intuitive syntax, strong editing environment, and natural handling of matrix operations. Because vector and matrix algebra form the core of the exercises presented in this book, MATLAB provides a framework that aligns directly with the pedagogical goals of the book. To support readers who are new to MATLAB, a dedicated workshop is included.
-
 ## Structure of the Exercises
 Each exercise combines a concise theoretical overview with a worked application. The exposition is provided in PDF format and paired with the corresponding `.m` file, allowing readers to connect the mathematical ideas to executable code.
+
+## Why MATLAB
+MATLAB was chosen for its intuitive syntax, strong editing environment, and natural handling of matrix operations. Because vector and matrix algebra form the core of the exercises presented in this book, MATLAB provides a framework that aligns directly with the pedagogical goals of the book. To support readers who are new to MATLAB, a dedicated workshop is included.
 
 ## MathWorks Book Program
 This textbook has been accepted into the [MathWorks Book Program](https://nl.mathworks.com/academia/books.html).
