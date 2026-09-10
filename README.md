@@ -17,7 +17,7 @@ Each exercise combines a concise theoretical overview with a worked application.
 MATLAB was chosen for its intuitive syntax, strong editing environment, and natural handling of matrix operations. Because vector and matrix algebra form the core of the exercises presented in this book, MATLAB provides a framework that aligns directly with the pedagogical goals of the book. To support readers who are new to MATLAB, a dedicated workshop is included.
 
 ## MathWorks Book Program
-This textbook has been accepted into the [MathWorks Book Program](https://nl.mathworks.com/academia/books.html).
+This project has been accepted into the [MathWorks Book Program](https://nl.mathworks.com/academia/books.html).
 
 ## Required Toolboxes
 Some exercises may require the **Statistics and Machine Learning Toolbox** of MATLAB.
