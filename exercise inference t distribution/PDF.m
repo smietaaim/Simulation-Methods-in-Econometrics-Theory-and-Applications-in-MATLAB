@@ -3,7 +3,7 @@ function y = PDF(x,nu)
 % Version 1.0, September 2026
 % Compatible with MATLAB R2014a and later
 %
-% Author: Tunga Kantarci
+% Authors: Akash Boelens, Renata-Maria Istrătescu, Tunga Kantarcı
 %
 % Description:
 %   This function evaluates the probability density function (PDF) of
