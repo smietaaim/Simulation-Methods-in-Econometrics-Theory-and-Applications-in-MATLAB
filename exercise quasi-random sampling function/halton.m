@@ -4,7 +4,7 @@ function [H,Z] = halton(N,dimensions,draws,varargin)
 % Compatible with MATLAB R2014a and later
 %
 % Original Author: Elisabeth Beusch
-% Modified by: Tunga Kantarci, August 2025
+% Modified by: Tunga Kantarcı, August 2025
 %
 % Description of Modifications:
 %   - Adjusted comments and code to prevent edge cases and input 
