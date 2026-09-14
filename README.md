@@ -1,4 +1,4 @@
-# Simulation-Based Econometrics with MATLAB
+# Simulation Methods in Econometrics: Theory and Applications in MATLAB
 
 **Companion Website:** [smietaaim.github.io](https://smietaaim.github.io)
 
