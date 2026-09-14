@@ -1,8 +1,8 @@
 # Simulation Methods in Econometrics: Theory and Applications in MATLAB
 
-**Companion Website:** [smietaaim.github.io](https://smietaaim.github.io)
+## Companion Website
 
-This repository contains the source files for the book and accompanying materials. For the most up-to-date version of the text, exercises, MATLAB code, and supplementary resources, please visit the companion website.
+This repository contains the source files for the book and accompanying materials. For the most up-to-date version of the text, exercises, MATLAB code, and supplementary resources, please visit the companion website: [smietaaim.github.io](https://smietaaim.github.io)
 
 ## Introduction
 
