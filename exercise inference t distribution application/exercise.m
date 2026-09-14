@@ -12,25 +12,21 @@ nu5 = 5;
 
 %% 3. Simulating the t distribution from its stochastic representation
 
-% 3.1. Number of random samples
+% 3.1. Number of random draws
 N = 1000;
 
-% 3.2. Generate standard normal and chi-squared random variables
-Z = random('Normal',0,1,N,1);
-U = random('Chi-square',nu5,N,1);
+% 3.2. Construct t-distributed random variables
+draws = StochasticRepresentation(N,nu5); % In MATLAB, random('T',nu,N,1)
 
-% 3.3. Construct t-distributed random variables
-samples = Z ./ sqrt(U/nu5); % Alternatively, samples = random('T',nu,N,1);
-
-% 3.4. Plot histogram
+% 3.3. Plot histogram
 figure;
 set(gcf,'Position',[100 100 1000 1000]);
-histogram(samples, ...
+histogram(draws, ...
     'BinLimits',[-6,6], ...
     'NumBins',30, ...
     'DisplayName','All simulated values');
 title(['Fig. 1. Histogram of simulated t-distributed draws, N = ', ...
-       num2str(N), ', \nu = ', num2str(nu5)]);
+       num2str(N),', \nu = ',num2str(nu5)]);
 xlabel('t');
 ylabel('Frequency');
 xlim([-6 6]);
@@ -38,24 +34,20 @@ legend('show');
 
 %% 4. Increasing the number of simulated draws
 
-% 4.1. Number of random samples
+% 4.1. Number of random draws
 N = 1000000;
 
-% 4.2. Generate standard normal and chi-squared random variables
-Z = random('Normal',0,1,N,1);
-U = random('Chi-square',nu5,N,1);
-
-% 4.3. Construct t-distributed random variables
-samples = Z ./ sqrt(U / nu5); 
+% 4.2. Construct t-distributed random variables
+draws = StochasticRepresentation(N,nu5);
 
 % 4.3. Plot histogram
 figure;
 set(gcf,'Position',[100 100 1000 1000]);
-histogram(samples, ...
+histogram(draws, ...
     'BinLimits',[-6,6], ...
     'DisplayName','All simulated values');
 title(['Fig. 2. Histogram of simulated t-distributed draws, N = ', ...
-       num2str(N), ', \nu = ', num2str(nu5)]);
+       num2str(N),', \nu = ',num2str(nu5)]);
 xlabel('t');
 ylabel('Frequency');
 xlim([-6 6]);
@@ -67,7 +59,7 @@ legend('show');
 x = -6:0.1:6;
 
 % 5.2. Evaluate the PDF of the t distribution
-y = PDF(x,nu5);
+y = PDF(x,nu5); % In MATLAB, pdf('T',x,nu5)
 
 % 5.3. Plot the PDF
 figure;
