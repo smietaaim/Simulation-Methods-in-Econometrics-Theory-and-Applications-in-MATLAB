@@ -17,11 +17,11 @@ Each exercise combines a concise theoretical overview with a worked application.
 ## Why MATLAB
 MATLAB was chosen for its intuitive syntax, strong editing environment, and natural handling of matrix operations. Because vector and matrix algebra form the core of the exercises presented in this book, MATLAB provides a framework that aligns directly with the pedagogical goals of the book. To support readers who are new to MATLAB, a dedicated workshop is included.
 
-## MathWorks Book Program
-This project has been accepted into the [MathWorks Book Program](https://nl.mathworks.com/academia/books.html).
-
 ## Ongoing Development
 The material is actively updated. Minor errors or inconsistencies may appear and will be corrected as the project evolves.
+
+## MathWorks Book Program
+This project has been accepted into the [MathWorks Book Program](https://nl.mathworks.com/academia/books.html).
 
 ## Companion Website
 
