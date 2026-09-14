@@ -1,9 +1,5 @@
 # Simulation Methods in Econometrics: Theory and Applications in MATLAB
 
-## Companion Website
-
-This repository contains the source files for the book and accompanying materials. The companion website is available at [smietaaim.github.io](https://smietaaim.github.io).
-
 ## Introduction
 Fundamental concepts in econometrics rest on the notion of repeated sampling from a population. However, in practice, repeated sampling is almost never feasible, which makes many of these concepts difficult to demonstrate and easy to treat as purely abstract. Peter Kennedy already highlighted this problem in 1979, in the first edition of A Guide to Econometrics, urging instructors to show students the sampling distribution of an estimator rather than merely describe it. His advice has not been widely adopted in teaching, but it has shaped the motivation behind the first four chapters of this book.
 
@@ -26,3 +22,7 @@ This project has been accepted into the [MathWorks Book Program](https://nl.math
 
 ## Ongoing Development
 The material is actively updated. Minor errors or inconsistencies may appear and will be corrected as the project evolves.
+
+## Companion Website
+
+This repository contains the source files for the book and accompanying materials. The companion website is available at [smietaaim.github.io](https://smietaaim.github.io).
