@@ -24,8 +24,5 @@ MATLAB was chosen for its intuitive syntax, strong editing environment, and natu
 ## MathWorks Book Program
 This project has been accepted into the [MathWorks Book Program](https://nl.mathworks.com/academia/books.html).
 
-## Required Toolboxes
-Some exercises may require the **Statistics and Machine Learning Toolbox** of MATLAB.
-
 ## Ongoing Development
 The material is actively updated. Minor errors or inconsistencies may appear and will be corrected as the project evolves.
