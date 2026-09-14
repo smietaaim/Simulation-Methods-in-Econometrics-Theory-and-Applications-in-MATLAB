@@ -2,10 +2,9 @@
 
 ## Companion Website
 
-This repository contains the source files for the book and accompanying materials. The companion website is [smietaaim.github.io](https://smietaaim.github.io).
+This repository contains the source files for the book and accompanying materials. The companion website is available at [smietaaim.github.io](https://smietaaim.github.io).
 
 ## Introduction
-
 Fundamental concepts in econometrics rest on the notion of repeated sampling from a population. However, in practice, repeated sampling is almost never feasible, which makes many of these concepts difficult to demonstrate and easy to treat as purely abstract. Peter Kennedy already highlighted this problem in 1979, in the first edition of A Guide to Econometrics, urging instructors to show students the sampling distribution of an estimator rather than merely describe it. His advice has not been widely adopted in teaching, but it has shaped the motivation behind the first four chapters of this book.
 
 By generating simulated samples, we visualize stochastic convergence underlying results such as the Central Limit Theorem, examine the statistical properties of the Ordinary Least Squares estimator, and show how violations of the classical linear‑model assumptions affect its sampling distribution and thus its reliability for inference. These chapters aim not only to exploit the illustrative power of simulation, but also to spark interest in econometric theory itself, where estimators are constructed and their statistical properties are derived.
