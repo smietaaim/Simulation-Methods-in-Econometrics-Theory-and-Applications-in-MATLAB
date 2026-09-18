@@ -69,7 +69,7 @@ xlabel('t');
 ylabel('Frequency');
 legend('show');
 
-%% 5. Highlight the extreme values and estimate the p-value by simulation
+%% 5. Highlight extreme values and estimate the p-value by simulation
 
 % 5.1. Select values exceeding the t-statistic
 extremeValues = draws(draws > tValue);
