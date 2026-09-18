@@ -1,1 +1,1 @@
-See the exercise on exogeneity.
+See the exercise on exogeneity for a discussion of the assumption underlying OLS unbiasedness.
