@@ -1,1 +1,1 @@
-See the exercise on exogeneity for a discussion of the assumption underlying OLS unbiasedness.
+See the section Linear Regression: Functions and Assumptions for a discussion of the assumptions underlying OLS unbiasedness.
