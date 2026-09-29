@@ -36,7 +36,7 @@ B_hat_SEE_sim = NaN(N_sim,N_par);
 for i = 1:N_sim
     u = random('Normal',0,1,[N_obs 1]);
     y = X*B_true+u; % The data generating process (DGP)
-    LSS = exercisefunctionlss(y,X);
+    LSS = lss(y,X);
     B_hat_sim(i,1) = LSS.B_hat(1,1); % B_hat is a random variable
     B_hat_SEE_sim(i,1) = LSS.B_hat_SEE(1,1);
 end 
@@ -61,6 +61,7 @@ CI = RIs(1,:);
 %% 5. Plot the RIs from all samples and the population coefficient
 
 % 5.1. Plot the RIs from all samples and the population coefficient
+figure('Position',[100 100 1000 1000]);
 hold on
 for i = 1:N_sim
     plot(RIs(i,:),[i,i],'k-','LineWidth',0.5);
