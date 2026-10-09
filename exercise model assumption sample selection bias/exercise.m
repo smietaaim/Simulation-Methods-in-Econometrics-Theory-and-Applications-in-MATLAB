@@ -38,7 +38,7 @@ for i = 1:N_sim
     % DGP of the population model
     y = B_0 * x_0 + B_1 * x_1 + u;
     % Sample-selection mechanism: observations selected based on x_1 and u
-    selected = (x_1 + u > 0);
+    selected = (x_1 + u > 0); % Or, (x_1 .* u > 0)
     y_obs = y(selected);
     x_0_obs = x_0(selected);
     x_1_obs = x_1(selected);
@@ -71,7 +71,10 @@ plot(x_grid,f,...
      'Color',[0.000 0.000 0.000], ...
      'DisplayName','Sampling distribution of Beta\_hat\_1')
 % Expand the x-axis range
-xlim([min(x_grid) - 0.1 B_1 + 0.1])
+lower = min([x_grid(:); B_1]) - 0.1;
+upper = max([x_grid(:); B_1]) + 0.1;
+xlim([lower upper])
+%xlim([min(x_grid) - 0.1 B_1 + 0.1])
 hold on
 % Add the mean of the sampling distribution
 line([B_hat_1_mean B_hat_1_mean],ylim,...
