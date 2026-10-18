@@ -96,6 +96,7 @@ B_hat_1_sim = NaN(N_sim,1);
 
 %% 10. Conduct the Monte Carlo simulation
 
+% Create the sampling distribution
 for i = 1:N_sim
     % Generate the constant term
     x_0 = ones(N_obs,1);
