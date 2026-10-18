@@ -20,9 +20,9 @@ close all;
 % 4.1. Number of observations
 N_obs = 250;
 
-% 4.2. True regression coefficient
-B_0 = 1.0;
-B_1 = 2.0;
+% 4.2. True parameters of the nonlinear population model
+a_0 = 1.0;
+a_1 = 1.5;
 
 %% 5. Create the true data-generating process
 
@@ -30,15 +30,15 @@ B_1 = 2.0;
 x_0 = ones(N_obs,1);
 
 % 5.2. Generate random values from the uniform distribution
-x_1 = random('Uniform',0,2,[N_obs,1]); 
+x_1 = random('Uniform',0,2,[N_obs,1]);
 
 % 5.3. Generate random values from the normal distribution
-u = random('Normal',0,1,[N_obs,1]); 
+u = random('Normal',0,1,[N_obs,1]);
 
 % 5.4. DGP of the population model
-y = B_0 * x_0 + exp(B_1 * x_1) + u; 
+y = a_0 * x_0 + exp(a_1 * x_1) + u;
 
-%% 6. Obtain OLS statsistics
+%% 6. Obtain OLS statistics
 
 % 6.1. Generate regressor vector
 X = [x_0 x_1];
@@ -46,10 +46,7 @@ X = [x_0 x_1];
 % 6.2. Assume an incorrect linear model and estimate it with OLS
 LSS = lss(y,X);
 
-% 6.3. Obtain the coefficient estimates
-B_hat = LSS.B_hat(:,:);
-
-% 6.4. Obtain fitted values
+% 6.3. Obtain fitted values
 y_hat = LSS.y_hat(:,:);
 
 %% 7. Plot the scatter diagram and the OLS fitted line
@@ -60,101 +57,96 @@ y_hat_sorted = y_hat(idx);
 
 % 7.2. Figure
 figure('Position',[100 100 1000 1000]);
-scatter(x_1,y, ...
-    'filled','black', ...
+scatter(x_1,y,...
+    'filled','black',...
     'DisplayName','Scatter plot')
 hold on
-plot(x_1_sorted,y_hat_sorted, ...
+plot(x_1_sorted,y_hat_sorted,...
     'Color','blue',...
     'DisplayName','OLS fitted line')
 hold off
 title('Fig. 1. Nonlinear Population Model and Linear OLS Fit')
 legend('show')
 
-%% 8. Demonstrate model misspecificaiton
+%% 8. Demonstrate model misspecification
 
 % 8.1. Obtain the residuals
 u_hat = LSS.u_hat(:,:);
 
-% 8.2. Mean of the residuals for a subset of x_1
+% 8.2. Plot residuals against the regressor
 figure('Position',[100 100 1000 1000]);
-scatter(x_1,u_hat,'filled',...
+scatter(x_1,u_hat,...
+    'filled',...
     'DisplayName','Residuals')
 hold on
-yline(0,'r',...
+yline(0,...
+    'r',...
     'DisplayName','Zero residual')
 hold off
 title('Fig. 2. Residuals versus Regressor')
 legend('show')
 
-% The residuals exhibit a systematic pattern with respect to x_1.
-% Therefore, the zero conditional mean assumption is violated.
-% As a result, OLS is biased under functional form misspecification.
-
 %% 9. Set Monte Carlo simulation parameters
 
 % 9.1. Number of Monte Carlo replications
-N_rep = 1000;
+N_sim = 1000;
 
 % 9.2. Store OLS slope estimates
-B_hat_1_sim = zeros(N_rep,1);
+B_hat_1_sim = NaN(N_sim,1);
 
 %% 10. Conduct the Monte Carlo simulation
 
-for i = 1:N_rep
-    % 10.1. Generate the constant term
+for i = 1:N_sim
+    % Generate the constant term
     x_0 = ones(N_obs,1);
-    % 10.2. Generate the regressor
+    % Generate the regressor
     x_1 = random('Uniform',0,2,[N_obs,1]);
-    % 10.3. Generate the disturbance term
+    % Generate the disturbance term
     u = random('Normal',0,1,[N_obs,1]);
-    % 10.4. Generate data from the nonlinear population model
-    y = B_0 * x_0 + exp(B_1 * x_1) + u;
+    % Generate data from the nonlinear population model
+    y = a_0 * x_0 + exp(a_1 * x_1) + u;
     % Generate regressor vector
     X = [x_0 x_1];
-    % 10.5. Estimate an incorrect linear model
+    % Estimate an incorrect linear model
     LSS = lss(y,X);
-    % 10.6. Store the slope estimate
+    % Store the slope estimate
     B_hat_1_sim(i) = LSS.B_hat(2);
 end
 
-%% 11. Evaluate the finite-sample bias
+%% 11. Evaluate the sampling distribution
 
 % 11.1. Mean OLS estimate
-mean_B_hat = mean(B_hat_1_sim);
+B_hat_1_sim_mean = mean(B_hat_1_sim);
 
-% 11.2. Estimated bias relative to the parameter used in the DGP
-bias_B_hat = mean_B_hat - B_1;
+% 11.2. Difference from the DGP parameter
+bias = B_hat_1_sim_mean - a_1;
 
 %% 12. Plot the sampling distribution
 
-% 12.1. Mean of the sampling distribution
-B_hat_1_sim_mean = mean(B_hat_1_sim);
-
-% 12.2. Create a figure
+% Create a figure
 figure('Position',[100 100 1000 1000]);
 % Estimate the density
 [f,x] = ksdensity(B_hat_1_sim);
 % Plot the density
+hold on
 plot(x,f,...
      'Color',[0.000 0.000 0.000],...
-     'DisplayName','Sampling distribution of Beta\_hat\_1')
+     'DisplayName','Sampling distribution of B\_hat\_1')
 % Expand the x-axis range
-lower = min([x(:); B_1]) - 0.1;
-upper = max([x(:); B_1]) + 0.1;
+lower = min([x(:);a_1]) - 0.1;
+upper = max([x(:);a_1]) + 0.1;
 xlim([lower upper])
-hold on
 % Add the mean of the sampling distribution
 line([B_hat_1_sim_mean B_hat_1_sim_mean],ylim,...
      'Color',[1.000 0.000 0.000],...
-     'DisplayName','Mean of Beta\_hat\_1')
+     'DisplayName','Mean of B\_hat\_1')
 % Add the parameter used in the DGP
-line([B_1 B_1],ylim,...
+line([a_1 a_1],ylim,...
      'Color',[0.000 0.000 1.000],...
-     'DisplayName','Parameter used in the DGP')
+     'DisplayName','a\_1')
 hold off
 title(['Fig. 3. Sampling Distribution of the OLS Estimator ' ...
        'under Functional Form Misspecification'])
 legend('show')
-xlabel('Beta\_hat\_1')
+xlabel('B\_hat\_1')
 ylabel('Density')
