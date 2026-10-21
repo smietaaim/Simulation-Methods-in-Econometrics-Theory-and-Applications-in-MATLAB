@@ -1,4 +1,4 @@
-% Exercise - Understanding the Bootstrap theory using simulation
+% Exercise - Understanding bootstrap theory using simulation
 
 %% 1. Aim of the exercise
 
@@ -41,7 +41,13 @@ N_obs_vec = [10 100 1000];
 % 3.7. Draw a sequence of observations from the population
 data_all = random('Exponential',mu,[max(N_obs_vec),1]);
 
-%% 4. Construct the bootstrap distribution and its benchmark approximation
+% The statistic of interest is Tn = sqrt(n) * (sample mean - mu). Because
+% the sample mean of n exponential draws follows a Gamma distribution, the
+% sampling distribution of Tn is known analytically. This allows the
+% bootstrap approximation to be compared directly with the true sampling
+% distribution.
+
+%% 4. Construct bootstrap distributions for different numbers of replications
 
 % Prepare to study how the simulated bootstrap distribution converges to
 % the bootstrap distribution as the number of bootstrap replications B
@@ -81,7 +87,7 @@ G_boot_ref = arrayfun(@(t) mean(T_boot <= t),tau_grid);
 % The bootstrap CDF at tau equals the proportion of bootstrap statistics
 % that do not exceed tau.
 
-%% 5. Convergence of the simulated bootstrap distribution as B grows
+%% 5. Convergence from simulated bootstrap to bootstrap distribution
 
 % Plot the simulated bootstrap PDF based on the first B bootstrap
 % replications, together with the benchmark bootstrap PDF and the true
@@ -109,8 +115,6 @@ lgd = legend( ...
 lgd.Layout.Tile = 'south';
 title(layout,['Fig. 1. Simulated bootstrap PDF as B grows (n = ' ...
     num2str(N_obs) ')'])
-
-%% 6. Convergence of the simulated bootstrap distribution as B grows
 
 % Plot the simulated bootstrap CDF based on the first B bootstrap
 % replications, together with the benchmark bootstrap CDF and the true
@@ -144,19 +148,19 @@ lgd.Layout.Tile = 'south';
 title(layout,['Fig. 2. Simulated bootstrap CDF as B grows (n = ' ...
     num2str(N_obs) ')'])
 
-%% 7. Construct bootstrap distributions for different sample sizes
+%% 6. Construct bootstrap distributions for different sample sizes
 
 % Prepare to study how the bootstrap distribution converges to the sampling
 % distribution as the sample size n increases.
 
-% 7.1. Set the number of bootstrap replications
+% 6.1. Set the number of bootstrap replications
 N_boot = 10^4;
 
-% 7.2. Preallocate storage for the bootstrap statistic
+% 6.2. Preallocate storage for the bootstrap statistic
 T_boot_n = NaN(N_boot,length(N_obs_vec));
 
-% 7.3. For each sample size, pick the initial sample, draw bootstrap
-% samples, and compute the bootstrap statistic
+% 6.3. For each sample size, select the original sample, draw bootstrap
+% replications, and compute the bootstrap statistic
 for i = 1:length(N_obs_vec)
     n = N_obs_vec(i);
     data_sample = data_all(1:n);
@@ -166,7 +170,7 @@ for i = 1:length(N_obs_vec)
     end
 end
 
-%% 8. Convergence of the bootstrap distribution as n grows
+%% 7. Convergence from bootstrap distribution to sampling distribution
 
 % Plot the bootstrap PDF and the true sampling PDF for different sample
 % sizes. As n increases, the bootstrap PDF should provide an increasingly
@@ -193,8 +197,6 @@ lgd = legend( ...
 lgd.Layout.Tile = 'south';
 title(layout,['Fig. 3. Bootstrap PDF and sampling PDF as n grows (B = ' ...
     num2str(N_boot) ')'])
-
-%% 9. Convergence of the bootstrap distribution as n grows
 
 % Plot the bootstrap CDF and the true sampling CDF for different sample
 % sizes. The title of each panel reports the largest distance between the
