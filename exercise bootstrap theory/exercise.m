@@ -89,10 +89,12 @@ G_boot_ref = arrayfun(@(t) mean(T_boot <= t),tau_grid);
 
 %% 5. Convergence from simulated bootstrap to bootstrap distribution
 
+% 5.1. Plot the simulated bootstrap PDFs
+
 % Plot the simulated bootstrap PDF based on the first B bootstrap
 % replications, together with the benchmark bootstrap PDF and the true
 % sampling PDF.
-figure('Position',[100 100 1000 1000]);
+figure('Position',[100 100 1200 450]);
 layout = tiledlayout(1,3,'TileSpacing','compact','Padding','compact');
 for i = 1:length(N_boot_vec)
     B = N_boot_vec(i);
@@ -108,24 +110,30 @@ end
 xlabel(layout,'\tau')
 ylabel(layout,'Density')
 lgd = legend( ...
-    'Simulated bootstrap PDF (first B samples)', ...
-    'Bootstrap PDF (10^5 samples)', ...
+    'Simulated bootstrap PDF', ...
+    'Bootstrap PDF (10^5 replications)', ...
     'Sampling PDF', ...
     'Orientation','horizontal');
 lgd.Layout.Tile = 'south';
-title(layout,['Fig. 1. Simulated bootstrap PDF as B grows (n = ' ...
-    num2str(N_obs) ')'])
+t = title(layout, ...
+    ['Fig. 1. Simulated bootstrap PDF as B grows (n = ' ...
+    num2str(N_obs) ')']);
+t.FontSize = get(groot,'defaultAxesFontSize');
+t.FontWeight = 'normal';
+
+% 5.2. Plot the simulated bootstrap CDFs
 
 % Plot the simulated bootstrap CDF based on the first B bootstrap
 % replications, together with the benchmark bootstrap CDF and the true
 % sampling CDF. The title of each panel reports the largest distance
 % between the simulated bootstrap CDF and the benchmark bootstrap CDF over
 % the grid of tau values.
-figure('Position',[100 100 1000 1000]);
+figure('Position',[100 100 1200 450]);
 layout = tiledlayout(1,3,'TileSpacing','compact','Padding','compact');
 for i = 1:length(N_boot_vec)
     B = N_boot_vec(i);
-    G_boot = arrayfun(@(t) mean(T_boot(1:B) <= t),tau_grid);
+    G_boot = arrayfun( ...
+        @(t) mean(T_boot(1:B) <= t),tau_grid);
     dist_max = max(abs(G_boot - G_boot_ref));
     nexttile
     hold on
@@ -140,13 +148,16 @@ end
 xlabel(layout,'\tau')
 ylabel(layout,'Cumulative probability')
 lgd = legend( ...
-    'Simulated bootstrap CDF (first B samples)', ...
-    'Bootstrap CDF (10^5 samples)', ...
+    'Simulated bootstrap CDF', ...
+    'Bootstrap CDF (10^5 replications)', ...
     'Sampling CDF', ...
     'Orientation','horizontal');
 lgd.Layout.Tile = 'south';
-title(layout,['Fig. 2. Simulated bootstrap CDF as B grows (n = ' ...
-    num2str(N_obs) ')'])
+t = title(layout, ...
+    ['Fig. 2. Simulated bootstrap CDF as B grows (n = ' ...
+    num2str(N_obs) ')']);
+t.FontSize = get(groot,'defaultAxesFontSize');
+t.FontWeight = 'normal';
 
 %% 6. Construct bootstrap distributions for different sample sizes
 
@@ -172,11 +183,15 @@ end
 
 %% 7. Convergence from bootstrap distribution to sampling distribution
 
-% Plot the bootstrap PDF and the true sampling PDF for different sample
-% sizes. As n increases, the bootstrap PDF should provide an increasingly
-% accurate approximation to the sampling PDF.
-figure('Position',[100 100 1000 1000]);
-layout = tiledlayout(1,3,'TileSpacing','compact','Padding','compact');
+% 7.1. Plot the bootstrap and sampling PDFs
+
+% Plot the bootstrap PDF and the corresponding true sampling PDF for
+% different sample sizes. As n increases, the bootstrap PDF should provide
+% an increasingly accurate approximation to the sampling PDF.
+figure('Position',[100 100 1200 450]);
+layout = tiledlayout(1,3, ...
+    'TileSpacing','compact', ...
+    'Padding','compact');
 for i = 1:length(N_obs_vec)
     n = N_obs_vec(i);
     nexttile
@@ -192,19 +207,25 @@ ylabel(layout,'Density')
 lgd = legend( ...
     'Bootstrap PDF', ...
     'Sampling PDF', ...
-    'Orientation', ...
-    'horizontal');
+    'Orientation','horizontal');
 lgd.Layout.Tile = 'south';
-title(layout,['Fig. 3. Bootstrap PDF and sampling PDF as n grows (B = ' ...
-    num2str(N_boot) ')'])
+t = title(layout, ...
+    ['Fig. 3. Bootstrap PDF and sampling PDF as n grows (B = ' ...
+    num2str(N_boot) ')']);
+t.FontSize = get(groot,'defaultAxesFontSize');
+t.FontWeight = 'normal';
 
-% Plot the bootstrap CDF and the true sampling CDF for different sample
-% sizes. The title of each panel reports the largest distance between the
-% two CDFs over the grid of tau values. As n increases, the bootstrap CDF
-% should provide an increasingly accurate approximation to the sampling
-% CDF.
-figure('Position',[100 100 1000 1000]);
-layout = tiledlayout(1,3,'TileSpacing','compact','Padding','compact');
+% 7.2. Plot the bootstrap and sampling CDFs
+
+% Plot the bootstrap CDF and the corresponding true sampling CDF for
+% different sample sizes. The title of each panel reports the largest
+% distance between the two CDFs over the grid of tau values. As n
+% increases, the bootstrap CDF should provide an increasingly accurate
+% approximation to the sampling CDF.
+figure('Position',[100 100 1200 450]);
+layout = tiledlayout(1,3, ...
+    'TileSpacing','compact', ...
+    'Padding','compact');
 for i = 1:length(N_obs_vec)
     n = N_obs_vec(i);
     G_boot = arrayfun(@(t) mean(T_boot_n(:,i) <= t),tau_grid);
@@ -223,8 +244,10 @@ ylabel(layout,'Cumulative probability')
 lgd = legend( ...
     'Bootstrap CDF', ...
     'Sampling CDF', ...
-    'Orientation', ...
-    'horizontal');
+    'Orientation','horizontal');
 lgd.Layout.Tile = 'south';
-title(layout,['Fig. 4. Bootstrap CDF and sampling CDF as n grows (B = ' ...
-    num2str(N_boot) ')'])
+t = title(layout, ...
+    ['Fig. 4. Bootstrap CDF and sampling CDF as n grows (B = ' ...
+    num2str(N_boot) ')']);
+t.FontSize = get(groot,'defaultAxesFontSize');
+t.FontWeight = 'normal';
