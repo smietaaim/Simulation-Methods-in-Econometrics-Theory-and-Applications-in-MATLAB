@@ -132,8 +132,7 @@ figure('Position',[100 100 1200 450]);
 layout = tiledlayout(1,3,'TileSpacing','compact','Padding','compact');
 for i = 1:length(N_boot_vec)
     B = N_boot_vec(i);
-    G_boot = arrayfun( ...
-        @(t) mean(T_boot(1:B) <= t),tau_grid);
+    G_boot = arrayfun(@(t) mean(T_boot(1:B) <= t),tau_grid);
     dist_max = max(abs(G_boot - G_boot_ref));
     nexttile
     hold on
