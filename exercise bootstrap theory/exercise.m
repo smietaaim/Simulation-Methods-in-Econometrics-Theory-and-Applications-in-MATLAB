@@ -41,17 +41,7 @@ N_obs_vec = [10 100 1000];
 % 3.7. Draw a sequence of observations from the population
 data_all = random('Exponential',mu,[max(N_obs_vec),1]);
 
-% The statistic of interest is Tn = sqrt(n) * (sample mean - mu). Because
-% the sample mean of n exponential draws follows a Gamma distribution, the
-% sampling distribution of Tn is known analytically. This allows the
-% bootstrap approximation to be compared directly with the true sampling
-% distribution.
-
-%% 4. Construct bootstrap distributions for different numbers of replications
-
-% Prepare to study how the simulated bootstrap distribution converges to
-% the bootstrap distribution as the number of bootstrap replications B
-% increases.
+%% 4. Bootstrap distributions for different numbers of replications
 
 % 4.1. Set the sample size
 N_obs = 20;
@@ -84,16 +74,9 @@ g_boot_ref = ksdensity(T_boot,tau_grid,'function','pdf');
 % 4.8. Approximate the bootstrap CDF
 G_boot_ref = arrayfun(@(t) mean(T_boot <= t),tau_grid);
 
-% The bootstrap CDF at tau equals the proportion of bootstrap statistics
-% that do not exceed tau.
-
 %% 5. Convergence from simulated bootstrap to bootstrap distribution
 
 % 5.1. Plot the simulated bootstrap PDFs
-
-% Plot the simulated bootstrap PDF based on the first B bootstrap
-% replications, together with the benchmark bootstrap PDF and the true
-% sampling PDF.
 figure('Position',[100 100 1200 450]);
 layout = tiledlayout(1,3,'TileSpacing','compact','Padding','compact');
 for i = 1:length(N_boot_vec)
@@ -122,12 +105,6 @@ t.FontSize = get(groot,'defaultAxesFontSize');
 t.FontWeight = 'normal';
 
 % 5.2. Plot the simulated bootstrap CDFs
-
-% Plot the simulated bootstrap CDF based on the first B bootstrap
-% replications, together with the benchmark bootstrap CDF and the true
-% sampling CDF. The title of each panel reports the largest distance
-% between the simulated bootstrap CDF and the benchmark bootstrap CDF over
-% the grid of tau values.
 figure('Position',[100 100 1200 450]);
 layout = tiledlayout(1,3,'TileSpacing','compact','Padding','compact');
 for i = 1:length(N_boot_vec)
@@ -158,10 +135,7 @@ t = title(layout, ...
 t.FontSize = get(groot,'defaultAxesFontSize');
 t.FontWeight = 'normal';
 
-%% 6. Construct bootstrap distributions for different sample sizes
-
-% Prepare to study how the bootstrap distribution converges to the sampling
-% distribution as the sample size n increases.
+%% 6. Bootstrap distributions for different sample sizes
 
 % 6.1. Set the number of bootstrap replications
 N_boot = 10^4;
@@ -169,8 +143,7 @@ N_boot = 10^4;
 % 6.2. Preallocate storage for the bootstrap statistic
 T_boot_n = NaN(N_boot,length(N_obs_vec));
 
-% 6.3. For each sample size, select the original sample, draw bootstrap
-% replications, and compute the bootstrap statistic
+% 6.3. Compute the bootstrap statistic for each sample size
 for i = 1:length(N_obs_vec)
     n = N_obs_vec(i);
     data_sample = data_all(1:n);
@@ -183,10 +156,6 @@ end
 %% 7. Convergence from bootstrap distribution to sampling distribution
 
 % 7.1. Plot the bootstrap and sampling PDFs
-
-% Plot the bootstrap PDF and the corresponding true sampling PDF for
-% different sample sizes. As n increases, the bootstrap PDF should provide
-% an increasingly accurate approximation to the sampling PDF.
 figure('Position',[100 100 1200 450]);
 layout = tiledlayout(1,3, ...
     'TileSpacing','compact', ...
@@ -195,7 +164,8 @@ for i = 1:length(N_obs_vec)
     n = N_obs_vec(i);
     nexttile
     hold on
-    plot(tau_grid,ksdensity(T_boot_n(:,i),tau_grid,'function','pdf'),'r')
+    plot(tau_grid,ksdensity(T_boot_n(:,i),tau_grid, ...
+        'function','pdf'),'r')
     plot(tau_grid,g_pop(tau_grid,n),'k--')
     title(['n = ' num2str(n)])
     xlim([tau_grid(1) tau_grid(end)])
@@ -215,12 +185,6 @@ t.FontSize = get(groot,'defaultAxesFontSize');
 t.FontWeight = 'normal';
 
 % 7.2. Plot the bootstrap and sampling CDFs
-
-% Plot the bootstrap CDF and the corresponding true sampling CDF for
-% different sample sizes. The title of each panel reports the largest
-% distance between the two CDFs over the grid of tau values. As n
-% increases, the bootstrap CDF should provide an increasingly accurate
-% approximation to the sampling CDF.
 figure('Position',[100 100 1200 450]);
 layout = tiledlayout(1,3, ...
     'TileSpacing','compact', ...
