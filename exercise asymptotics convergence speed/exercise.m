@@ -1,4 +1,4 @@
-% Exercise - Understanding convergence concepts through simulation
+% Exercise - Understanding convergence concepts using simulation
 
 %% 1. Aim of the exercise
 
@@ -15,7 +15,7 @@ close all;
 %% 3. Set the parameters of the simulation
 
 % 3.1. Define alternative sample sizes (number of coin tosses)
-N_tosses = 50:50:5000;
+N_tosses = 1:9:1000;
 
 % 3.2. Define the number of alternative sample sizes
 N_samples = length(N_tosses);
@@ -82,17 +82,14 @@ hold off
 
 %% 7. Select representative sample sizes for visualization
 
-% 7.1. Define representative locations in the sample-size grid
+% 7.1. Define representative fractions of the sample-size grid
 fractions = [0.10, 0.30, 0.50, 1.00];
 
 % 7.2. Locate the corresponding positions in the sample-size grid
 target_indices = max(1,round(fractions * N_samples));
 
-% Using max(1,round(...)) ensures we always get a valid integer index
-
-% 7.3. Extract the selected sample sizes
+% 7.3. Extract the corresponding sample sizes
 target_n = N_tosses(target_indices);
-
 
 %% 8. Visualizing convergence in probability: op(1)
 
