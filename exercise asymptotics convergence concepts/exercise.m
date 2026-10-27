@@ -117,8 +117,7 @@ theoretical_bound = ...
     (1.96 * sqrt(var_population)) ./ sqrt(n_continuous);
 % Overlay the theoretical decay envelope
 plot(n_continuous,theoretical_bound,'-', ...
-    'Color',[0.850 0.325 0.098], ...
-    'DisplayName','Theoretical 95% decay envelope');
+    'Color',[0.850 0.325 0.098]);
 plot(n_continuous,-theoretical_bound,'-', ...
     'Color',[0.850 0.325 0.098], ...
     'HandleVisibility','off');
@@ -134,7 +133,6 @@ xlabel('Sample size');
 xlim([0,max(N_tosses)*1.05]);
 % Display only the selected sample sizes on the x-axis
 xticks(target_n);
-legend('show');
 hold off
 
 %% 9. Visualizing stochastic boundedness: Op(1)
