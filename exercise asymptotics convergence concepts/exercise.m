@@ -15,7 +15,7 @@ close all;
 %% 3. Set the parameters of the simulation
 
 % 3.1. Define alternative sample sizes (number of coin tosses)
-N_tosses = 1:9:1000;
+N_tosses = 1:10:991;
 
 % 3.2. Define the number of alternative sample sizes
 N_samples = length(N_tosses);
@@ -80,26 +80,12 @@ xlabel('Sample size');
 legend('show');
 hold off
 
-%% 7. Select representative sample sizes for visualization
-
-% 7.1. Define representative fractions of the sample-size grid
-fractions = [0.10, 0.30, 0.50, 1.00];
-
-% 7.2. Locate the corresponding positions in the sample-size grid
-target_indices = max(1,round(fractions * N_samples));
-
-% 7.3. Extract the corresponding sample sizes
-target_n = N_tosses(target_indices);
-
-%% 8. Visualizing convergence in probability: op(1)
+%% 7. Visualizing convergence in probability: op(1)
 
 % Plot the unscaled estimation errors
 figure('Position',[1000 1000 1000 1000]);
 hold on
-for k = 1:length(target_indices)
-    % The column index in means_samples
-    j = target_indices(k);
-    % The exact sample size for this iteration
+for j = 1:length(N_tosses)
     plot_n = N_tosses(j);
     % Compute the unscaled estimation error
     unscaled_error_col = means_samples(:,j) - mean_population;
@@ -111,16 +97,6 @@ for k = 1:length(target_indices)
         'MarkerEdgeAlpha',0.25, ...
         'HandleVisibility','off');
 end
-% Construct the theoretical 95% decay envelope
-n_continuous = linspace(min(N_tosses),max(N_tosses)*1.05,500);
-theoretical_bound = ...
-    (1.96 * sqrt(var_population)) ./ sqrt(n_continuous);
-% Overlay the theoretical decay envelope
-plot(n_continuous,theoretical_bound,'-', ...
-    'Color',[0.850 0.325 0.098]);
-plot(n_continuous,-theoretical_bound,'-', ...
-    'Color',[0.850 0.325 0.098], ...
-    'HandleVisibility','off');
 % Add a reference line at zero estimation error
 yline(0,'-', ...
     'Color',[0.000 0.000 0.000], ...
@@ -129,21 +105,14 @@ title('Fig 2. Convergence in probability of the unscaled error');
 ylabel(['Unscaled deviation of the sample proportion from the true ' ...
     'probability']);
 xlabel('Sample size');
-% Dynamically set the x-axis limit based on the maximum sample size
-xlim([0,max(N_tosses)*1.05]);
-% Display only the selected sample sizes on the x-axis
-xticks(target_n);
 hold off
 
-%% 9. Visualizing stochastic boundedness: Op(1)
+%% 8. Visualizing stochastic boundedness: Op(1)
 
 % Plot the root-n scaled estimation errors
 figure('Position',[1000 1000 1000 1000]);
 hold on
-for k = 1:length(target_indices)
-    % The column index in means_samples
-    j = target_indices(k);
-    % The exact sample size for this iteration
+for j = 1:length(N_tosses)
     plot_n = N_tosses(j);
     % Compute the root-n scaled estimation error
     scaled_error_col = sqrt(plot_n) * ...
@@ -162,36 +131,30 @@ title('Fig 3. Stochastic boundedness of the root-n scaled error');
 ylabel(['Root-n scaled deviation of the sample proportion from ' ...
     'the true probability'])
 xlabel('Sample size');
-% Dynamically set the x-axis limit based on the actual max value
-xlim([0,max(N_tosses) * 1.05]);
-% Fix the y-axis range
-ylim([-2,2]);
-% Display only the selected sample sizes on the x-axis
-xticks(target_n);
 hold off
 
-%% 10. Visualizing asymptotic normality of the root-n scaled error
+%% 9. Visualizing asymptotic normality of the root-n scaled error
 
-% 10.1. Select the largest sample size for the CLT demonstration
+% 9.1. Select the largest sample size for the CLT demonstration
 n_large = N_tosses(N_samples);
 
-% 10.2. Calculate the root-n scaled estimation error
+% 9.2. Calculate the root-n scaled estimation error
 scaled_error_clt = sqrt(n_large) * ...
     (means_samples(:,N_samples) - mean_population);
 
-% 10.3. Estimate the empirical density of the scaled errors
+% 9.3. Estimate the empirical density of the scaled errors
 [f_empirical,x_empirical] = ksdensity(scaled_error_clt);
 
-% 10.4. Calculate the theoretical standard deviation implied by the CLT
+% 9.4. Calculate the theoretical standard deviation implied by the CLT
 std_dev = sqrt(var_population);
 
-% 10.5. Create an evaluation grid for the theoretical Normal density
+% 9.5. Create an evaluation grid for the theoretical Normal density
 x_theoretical = linspace(min(x_empirical),max(x_empirical),500);
 
-% 10.6. Evaluate the theoretical Normal density on the grid
+% 9.6. Evaluate the theoretical Normal density on the grid
 f_theoretical = normpdf(x_theoretical,0,std_dev);
 
-% 10.7. Compare the empirical and theoretical densities
+% 9.7. Compare the empirical and theoretical densities
 figure('Position',[1000 1000 1000 1000]);
 hold on
 % Plot the empirical kernel density estimate
@@ -202,9 +165,10 @@ plot(x_empirical,f_empirical,'-', ...
 plot(x_theoretical,f_theoretical,'-', ...
     'Color',[0.850 0.325 0.098], ...
     'DisplayName','Theoretical Normal density');
+xlim([-2.5,2.5]);
 title('Fig 4. Asymptotic normality of the root-n scaled error');
+ylabel('Probability density');
 xlabel(['Root-n scaled deviation of the sample proportion from ' ...
     'the true probability']);
-ylabel('Probability density');
 legend('show');
 hold off
