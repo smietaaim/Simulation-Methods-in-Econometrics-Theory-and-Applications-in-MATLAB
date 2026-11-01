@@ -1,6 +1,7 @@
-% Exercise - Understanding the method of basic bootsrap
+% Exercise - Understanding the method of standard bootsrap
 
 %% 1. Aim of the exercise
+
 % The aim of this exercise is to understand how to correctly estimate the
 % sampling distribution of a statistic, in particular that of the sample
 % mean, when the population distribution is unknown. We compare two
@@ -9,6 +10,7 @@
 % approximates the true distribution.
 
 %% 2. Theory
+
 % Refer to the accompanying PDF file for the theory.
 
 %% 3. Set values for the parameters of the simulation
@@ -66,7 +68,9 @@ for i = 1:N_sim
 end
 
 %% 8. Plot the PDFs of sample means from bootstrap and population sampling
-figure;
+
+% Figure
+figure('Position',[100 100 1000 1000]);
 hold on
 ksdensity(means_data_samples_boot,'function','pdf');
 ksdensity(means_data_samples_pop,'function','pdf');
@@ -78,7 +82,9 @@ title(['Fig. 1. PDFs of sample means based on bootstrap and ' ...
 hold off
 
 %% 9. Plot the CDFs of sample means from bootstrap and population sampling
-figure;
+
+% Figure
+figure('Position',[100 100 1000 1000]);
 hold on
 ksdensity(means_data_samples_boot,'function','cdf');
 ksdensity(means_data_samples_pop,'function','cdf');
