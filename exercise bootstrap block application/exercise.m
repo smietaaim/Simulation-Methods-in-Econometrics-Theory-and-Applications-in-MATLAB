@@ -1,6 +1,7 @@
 % Exercise - Understanding the method of block bootstrap
 
 %% 1. Aim of the exericse
+
 % The aim of this exercise is to understand how to correctly estimate the
 % sampling distribution of a statistic (e.g., the sample mean) when data
 % are serially correlated, such as in time-series settings. Standard
@@ -10,6 +11,7 @@
 % the population.
 
 %% 2. Theory
+
 % Refer to the accompanying PDF file for the theory.
 
 %% 3. Set values for the parameters of the simulation
@@ -35,7 +37,9 @@ varepsilon = random('Normal',0,1,[N_obs_pop,1]);
 data_pop = filter(1,1-phi,varepsilon);
 
 %% 5. Plot AR(1) time series
-figure
+
+% Figure
+figure('Position',[100 100 1000 1000]);
 plot(1:100,data_pop(1:100));
 xlabel('Time (t)');
 ylabel('X_t');
@@ -93,9 +97,13 @@ for i = 1:N_sim
 end
 
 %% 9. Plot estimated PDFs
-figure
-hold on
+
+% 9.1. Estimate the density
 [f_boot,x_boot] = ksdensity(means_data_samples_boot,'function','pdf');
+
+% 9.2. Create a figure
+figure('Position',[100 100 1000 1000]);
+hold on
 plot(x_boot,f_boot,'Color',[0.8500,0.3250,0.0980], ...
     'DisplayName','Bootstrap sample means');
 [f_pop,x_pop] = ksdensity(means_data_samples_pop,'function','pdf');
@@ -109,9 +117,13 @@ legend('show')
 hold off
 
 %% 10. Plot estimated CDFs
-figure
-hold on
+
+% 10.1. Estimate the density
 [f_boot,x_boot] = ksdensity(means_data_samples_boot,'function','cdf');
+
+% 10.2. Create a figure
+figure('Position',[100 100 1000 1000]);
+hold on
 plot(x_boot,f_boot,'Color',[0.8500,0.3250,0.0980], ...
     'DisplayName','Bootstrap sample means');
 [f_pop,x_pop] = ksdensity(means_data_samples_pop,'function','cdf');
