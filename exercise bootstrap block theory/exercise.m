@@ -1,4 +1,4 @@
-% Exercise - Understanding the block bootstrap using simulation
+% Exercise - Understanding the theory of block bootstrap using simulation
 
 %% 1. Aim of the exercise
 
