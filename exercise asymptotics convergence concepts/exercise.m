@@ -152,7 +152,8 @@ std_dev = sqrt(var_population);
 x_theoretical = linspace(min(x_empirical),max(x_empirical),500);
 
 % 9.6. Evaluate the theoretical Normal density on the grid
-f_theoretical = normpdf(x_theoretical,0,std_dev);
+pd = makedist('Normal','mu',0,'sigma',std_dev);
+f_theoretical = pdf(pd,x_theoretical);
 
 % 9.7. Compare the empirical and theoretical densities
 figure('Position',[1000 1000 1000 1000]);
