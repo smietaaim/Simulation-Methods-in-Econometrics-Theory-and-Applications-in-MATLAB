@@ -1,4 +1,4 @@
-% Exercise - Understanding the theory of block bootstrap using simulation
+% Exercise - Understanding the theory of block bootstrap
 
 %% 1. Aim of the exercise
 
@@ -214,8 +214,8 @@ ratio_grid = linspace(0,3,3001)';
 % 8.5. Plot the PDF of the variance ratio across repeated samples for 
 % each block-length rule and sample size. A ratio of 1 means that the 
 % bootstrap variance equals the true variance.
-figure('Position',[100 100 1200 450]);
-layout = tiledlayout(1,N_rules, ...
+figure('Position',[100 100 1000 1000]);
+layout = tiledlayout(N_rules,1, ...
     'TileSpacing','compact','Padding','compact');
 for j = 1:N_rules
     nexttile
